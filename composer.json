@@ -1,0 +1,21 @@
+{
+    "name": "jimchen/tim-sdk-example",
+    "description": "TimSDK Example",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "JimChen",
+            "email": "18219111672@163.com"
+        }
+    ],
+    "require": {
+        "jimchen/tim-sdk": "dev-master",
+        "vlucas/phpdotenv": "^2.4"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ]
+    }
+}
