@@ -38,7 +38,12 @@ switch ($routeInfo[0]) {
             $response = call_user_func_array($handler, $vars);
 
             if (! is_null($response)) {
-                dump($response);
+                if ($_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') {
+                    header('Content-Type: application/json');
+                    echo $response->toJson();
+                    return ;
+                }
+                dump($response->toArray());
             }
 
         } else {
