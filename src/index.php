@@ -22,12 +22,12 @@ $routeInfo = require __DIR__ . '/bootstrap/dispatch.php';
 switch ($routeInfo[0]) {
     case FastRoute\Dispatcher::NOT_FOUND:
         // ... 404 Not Found
-        dump('404 Not Found');
+        dd('404 Not Found');
         break;
     case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
         $allowedMethods = $routeInfo[1];
         // ... 405 Method Not Allowed
-        dump('405 Method Not Allowed');
+        dd('405 Method Not Allowed');
         break;
     case FastRoute\Dispatcher::FOUND:
         $handler = $routeInfo[1];
@@ -40,6 +40,11 @@ switch ($routeInfo[0]) {
             if (! is_null($response)) {
                 if ($response instanceof \TimSDK\Foundation\ResponseBag) {
                     $response = $response->getContents();
+                }
+
+                if (strpos($_SERVER['HTTP_USER_AGENT'], 'curl') !== false) {
+                    var_export($response->toArray());
+                    return ;
                 }
 
                 if ($_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') {
