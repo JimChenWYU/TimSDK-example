@@ -37,7 +37,7 @@ $ ./server.sh
 
 - Send a request
 ```bash
-$ curl -X GET http://localhost:8080/v4/openim_dirty_words/get
+$ curl -X POST http://localhost:8080/v4/openim_dirty_words/get
 ```
 
 
