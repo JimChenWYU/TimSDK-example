@@ -38,6 +38,10 @@ switch ($routeInfo[0]) {
             $response = call_user_func_array($handler, $vars);
 
             if (! is_null($response)) {
+                if ($response instanceof \TimSDK\Foundation\ResponseBag) {
+                    $response = $response->getContents();
+                }
+
                 if ($_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') {
                     header('Content-Type: application/json');
                     echo $response->toJson();
