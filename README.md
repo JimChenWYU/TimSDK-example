@@ -30,7 +30,7 @@ PUBLIC_KEY=your public key
 ```
 
 
-- Start a server
+- Start a server **notice: listening 8080** 
 ```bash
 $ ./server.sh
 ```
@@ -38,6 +38,11 @@ $ ./server.sh
 - Send a request
 ```bash
 $ curl -X POST http://localhost:8080/v4/openim_dirty_words/get
+```
+
+- Multi send requests
+```bash
+$ ./run.sh
 ```
 
 
