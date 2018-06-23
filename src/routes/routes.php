@@ -25,6 +25,13 @@ foreach ($apiUris as $uri) {
     }
 
     $route->post($uri, function (TimCloud $cloud) use ($uri) {
-        return $cloud->request($uri, isset($_REQUEST['json']) ? $_REQUEST['json'] : []);
+        try {
+            return $cloud->request($uri, isset($_REQUEST['json']) ? $_REQUEST['json'] : []);
+        } catch (\TimSDK\Core\Exceptions\HttpException $e) {
+            return new \TimSDK\Support\Collection([
+                'ErrorCode' => $e->getCode(),
+                'ErrorInfo' => $e->getMessage()
+            ]);
+        }
     });
 }

@@ -19,15 +19,16 @@ $app = require __DIR__ . '/bootstrap/app.php';
 
 $routeInfo = require __DIR__ . '/bootstrap/dispatch.php';
 
+echo 'Request Api: '. $_SERVER['REQUEST_URI'] . PHP_EOL;
 switch ($routeInfo[0]) {
     case FastRoute\Dispatcher::NOT_FOUND:
         // ... 404 Not Found
-        dd('404 Not Found');
+        echo '404 Not Found' . PHP_EOL;
         break;
     case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
         $allowedMethods = $routeInfo[1];
         // ... 405 Method Not Allowed
-        dd('405 Method Not Allowed');
+        echo '405 Method Not Allowed' . PHP_EOL;
         break;
     case FastRoute\Dispatcher::FOUND:
         $handler = $routeInfo[1];
@@ -44,6 +45,7 @@ switch ($routeInfo[0]) {
 
                 if (strpos($_SERVER['HTTP_USER_AGENT'], 'curl') !== false) {
                     var_export($response->toArray());
+                    echo PHP_EOL . PHP_EOL;
                     return ;
                 }
 
